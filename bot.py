@@ -47,7 +47,7 @@ from telegram.ext import (
 BOT_TOKEN   = os.environ.get("BOT_TOKEN", "8790039582:AAFmeWBAFKMzSbBpipcHJNBMJb9X7y4NT_c").strip()
 _owner_raw  = os.environ.get("OWNER_ID", "5206554804").strip()
 OWNER_ID    = int(_owner_raw) if _owner_raw.isdigit() else None
-CHANNEL_ENV = os.environ.get("CHANNEL_ID", "").strip() or None   # e.g. @yourchannel (ya /setchannel)
+CHANNEL_ENV = os.environ.get("CHANNEL_ID", "@tech_zone_dev").strip() or None  # join-gate channel (ya /setchannel)
 PORT        = int(os.environ.get("PORT", "8080"))                # Render PORT deta hai
 
 BASE_DIR      = os.path.abspath("workspaces")   # har user ka apna folder
