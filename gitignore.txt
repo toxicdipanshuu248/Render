@@ -1,0 +1,5 @@
+workspaces/
+data/
+__pycache__/
+*.pyc
+.bg_logs/

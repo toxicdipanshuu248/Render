@@ -1,0 +1,18 @@
+# Optional Docker deploy — Python + Node.js dono milte hain,
+# taaki package.json ka `npm install` bhi kaam kare.
+# Render: service ka runtime "Docker" choose karo.
+FROM python:3.12-slim
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends bash curl ca-certificates nodejs npm \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+# Render PORT env deta hai; Flask usi par bind karta hai
+CMD ["python", "bot.py"]
