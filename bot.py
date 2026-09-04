@@ -1,17 +1,9 @@
 #!/usr/bin/env python3
 """
 ╔══════════════════════════════════════════════╗
-║   ⚡ TELEGRAM HOSTING BOT ⚡                  ║
-║   Render Free Tier (512 MB) Optimized        ║
-║                                              ║
-║   • Owner approval system (button w/ ID)     ║
-║   • Channel join gate (bot as channel admin) ║
-║   • Smart auto dependency installer          ║
-║     (requirements.txt / package.json / .zip) ║
-║   • Hacker-style terminal                    ║
-║   • Background process manager               ║
-║     (/run, /ps, /logs, /kill)                ║
-║   • Flask keep-alive for UptimeRobot 24x7    ║
+║   ⚡ TELEGRAM HOSTING BOT ⚡                  
+║   Optimized        
+║       
 ╚══════════════════════════════════════════════╝
 """
 
@@ -1296,6 +1288,15 @@ def run_flask():
 def main():
     if not BOT_TOKEN:
         raise SystemExit("❌ BOT_TOKEN missing hai — Render → Environment Variables me set karo.")
+
+    # Python 3.14+ (aur kuch strict environments) me asyncio.get_event_loop()
+    # bina current loop ke RuntimeError deta hai → PTB ka run_polling() crash.
+    # Isliye main thread me ek event loop explicitly bana ke set kar dete hain.
+    # (Har Python version 3.10–3.14 pe safe hai.)
+    try:
+        asyncio.get_running_loop()          # agar loop chal raha hai to theek
+    except RuntimeError:
+        asyncio.set_event_loop(asyncio.new_event_loop())
 
     load_data()
     os.makedirs(BASE_DIR, exist_ok=True)
